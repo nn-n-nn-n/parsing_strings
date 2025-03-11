@@ -22,12 +22,13 @@ string DeleteSpaces(string s)
 
 vector<double> ParseString(string str)
 {
-	vector<double> vs;
+	vector<double> vd;
 
 	str = DeleteSpaces(str);
 	int pos = 0;
 	int pos1 = -1;
 	string word;
+	double number;
 	if (!str.empty())
 	{
 		do
@@ -36,23 +37,23 @@ vector<double> ParseString(string str)
 			if (pos != -1)
 			{
 				word = str.substr(pos1 + 1, pos - pos1);
-				vs.push_back(word);
+				vd.push_back(word);
 				pos1 = pos;
 				pos++;
 			}
 			else
 			{
-				if (pos1 == -1) vs.push_back(str);
+				if (pos1 == -1) vd.push_back(str);
 				else
 				{
 					word = str.substr(pos1 + 1, str.length() - pos1);
-					vs.push_back(word);
+					vd.push_back(word);
 				}
 				break;
 			}
 		} while (pos != -1);
 	}
-	return vs;
+	return vd;
 }
 
 int main()
