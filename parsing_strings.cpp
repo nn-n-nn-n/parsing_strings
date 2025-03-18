@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-string DeleteSpaces(string s)
+string DeleteSpaces(string s)		// функция удаления пробелов в строке
 {
 	size_t pos = s.find(' ');
 
@@ -15,13 +15,11 @@ string DeleteSpaces(string s)
 				s.erase(pos, 1);
 			pos = s.find(' ');
 		}
-		//if (s[0] == ' ') s.erase(0);
-		//if (s[s.length() - 1] == ' ')s.erase(s.length() - 1);
 	}
 	return s;
 }
 
-vector<double> ParseString(string str)
+vector<double> ParseString(string str)	// функция парсинга
 {
 	vector<double> vd;
 
@@ -34,10 +32,13 @@ vector<double> ParseString(string str)
 	if (!str.empty())
 	{
 		pos = str.find(',', pos);
-		word = str.substr(pos2, pos - pos1);
-		number = stod(word);
-		vd.push_back(number);
-		while (pos != string::npos)
+		if (pos != string::npos)
+		{
+			word = str.substr(pos2, pos - pos1);	// получаем первое число
+			number = stod(word);
+			vd.push_back(number);
+		}
+		while (pos != string::npos)		// цикл для получения остальных чисел в векторе
 		{
 			pos = str.find(',', pos);
 			if (pos != string::npos)
@@ -49,13 +50,13 @@ vector<double> ParseString(string str)
 				pos++;
 			}
 			else
-				break;
+				break;	// выход из цикла, когда вектор достиг конца
 		}
 	}
 	return vd;
 }
 
-void PrintXY(vector<double> vector)
+void PrintXY(vector<double> vector)		// функция вывода в консоль
 {
 	setlocale(LC_ALL, "");
 	cout << "Количество точек: " << vector.size() / 2 << endl;
@@ -70,7 +71,7 @@ void PrintXY(vector<double> vector)
 int main()
 {
 	string str = "192.56, -21.2, 17.08, 22.8, -0.01, 0.02, 33.2, 43.8, -12.1, 14.5";
-
+	//string str = "   11.2, 321.1,32,1";
 	vector<double> vector = ParseString(str);
 	PrintXY(vector);
 }
